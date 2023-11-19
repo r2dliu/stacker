@@ -33,6 +33,12 @@
             "env": {
                 "CARGO_MANIFEST_DIR": "${workspaceFolder}",
             },
+            "osx": {
+                "env": {
+                    "CARGO_MANIFEST_DIR": "${workspaceFolder}",
+                    "DYLD_LIBRARY_PATH": "${env:HOME}/.rustup/toolchains/stable-aarch64-apple-darwin/lib"
+                }
+            },
             "linux": {
                 "env": {
                     // platform-specific launch config overwrites (rather than merges with) existing config, so need to specify CARGO_MANIFEST_DIR again

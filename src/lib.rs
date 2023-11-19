@@ -2,12 +2,14 @@
 
 mod actions;
 mod audio;
+mod board;
 mod loading;
 mod menu;
 mod player;
 
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
+use crate::board::BoardPlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
 use crate::player::PlayerPlugin;
@@ -21,7 +23,7 @@ use bevy::prelude::*;
 // See https://bevy-cheatbook.github.io/programming/states.html
 // Or https://github.com/bevyengine/bevy/blob/main/examples/ecs/state.rs
 #[derive(States, Default, Clone, Eq, PartialEq, Debug, Hash)]
-enum GameState {
+enum AppState {
     // During the loading State the LoadingPlugin will load our assets
     #[default]
     Loading,
@@ -31,13 +33,14 @@ enum GameState {
     Menu,
 }
 
-pub struct GamePlugin;
+pub struct StackerPlugin;
 
-impl Plugin for GamePlugin {
+impl Plugin for StackerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_state::<GameState>().add_plugins((
+        app.add_state::<AppState>().add_plugins((
             LoadingPlugin,
             MenuPlugin,
+            BoardPlugin,
             ActionsPlugin,
             InternalAudioPlugin,
             PlayerPlugin,
@@ -45,7 +48,7 @@ impl Plugin for GamePlugin {
 
         #[cfg(debug_assertions)]
         {
-            app.add_plugins((FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin::default()));
+            // app.add_plugins((FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin::default()));
         }
     }
 }

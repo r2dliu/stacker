@@ -5,7 +5,8 @@ use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use bevy::winit::WinitWindows;
 use bevy::DefaultPlugins;
-use bevy_game::GamePlugin; // ToDo: Replace bevy_game with your new crate name.
+use bevy_game::StackerPlugin; // ToDo: Replace bevy_game with your new crate name.
+use std::env;
 use std::io::Cursor;
 use winit::window::Icon;
 
@@ -26,7 +27,7 @@ fn main() {
             }),
             ..default()
         }))
-        .add_plugins(GamePlugin)
+        .add_plugins(StackerPlugin)
         .add_systems(Startup, set_window_icon)
         .run();
 }
@@ -36,6 +37,10 @@ fn set_window_icon(
     windows: NonSend<WinitWindows>,
     primary_window: Query<Entity, With<PrimaryWindow>>,
 ) {
+    if env::consts::OS == "macos" {
+        return;
+    }
+
     let primary_entity = primary_window.single();
     let primary = windows.get_window(primary_entity).unwrap();
     let icon_buf = Cursor::new(include_bytes!(
