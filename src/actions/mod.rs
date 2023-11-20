@@ -3,7 +3,7 @@ use bevy::prelude::*;
 
 use crate::actions::game_control::{get_movement, GameControl};
 use crate::player::Player;
-use crate::AppState;
+use crate::{AppState, GameState};
 
 mod game_control;
 
@@ -15,10 +15,23 @@ pub struct ActionsPlugin;
 // Actions can then be used as a resource in other systems to act on the player input.
 impl Plugin for ActionsPlugin {
     fn build(&self, app: &mut App) {
-        app.init_resource::<Actions>().add_systems(
-            Update,
-            set_movement_actions.run_if(in_state(AppState::Playing)),
-        );
+        app.init_resource::<Actions>()
+            .add_systems(
+                Update,
+                set_movement_actions.run_if(in_state(AppState::Playing)),
+            )
+            .add_systems(
+                Update,
+                handle_pause
+                    .run_if(in_state(AppState::Playing))
+                    .run_if(in_state(GameState::Running)),
+            )
+            .add_systems(
+                Update,
+                handle_unpause
+                    .run_if(in_state(AppState::Playing))
+                    .run_if(in_state(GameState::Paused)),
+            );
     }
 }
 
@@ -56,5 +69,23 @@ pub fn set_movement_actions(
         actions.player_movement = Some(player_movement.normalize());
     } else {
         actions.player_movement = None;
+    }
+}
+
+pub fn handle_pause(
+    mut next_state: ResMut<NextState<GameState>>,
+    keyboard_input: Res<Input<KeyCode>>,
+) {
+    if (keyboard_input.just_pressed(KeyCode::Escape)) {
+        next_state.set(GameState::Paused);
+    }
+}
+
+pub fn handle_unpause(
+    mut next_state: ResMut<NextState<GameState>>,
+    keyboard_input: Res<Input<KeyCode>>,
+) {
+    if (keyboard_input.just_pressed(KeyCode::Escape)) {
+        next_state.set(GameState::Running);
     }
 }
