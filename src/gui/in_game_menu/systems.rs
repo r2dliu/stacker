@@ -39,10 +39,10 @@ pub fn setup_menu(
                             height: Val::Px(50.0),
                             justify_content: JustifyContent::Center,
                             align_items: AlignItems::Center,
-                            ..Default::default()
+                            ..default()
                         },
                         background_color: button_colors.normal.into(),
-                        ..Default::default()
+                        ..default()
                     },
                     button_colors,
                 ))

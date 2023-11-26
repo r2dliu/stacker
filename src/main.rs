@@ -32,11 +32,11 @@ fn main() {
         .run();
 }
 
-// Sets the icon on windows and X11
 fn set_window_icon(
     windows: NonSend<WinitWindows>,
     primary_window: Query<Entity, With<PrimaryWindow>>,
 ) {
+    // macOS does not have a window icon
     if env::consts::OS == "macos" {
         return;
     }

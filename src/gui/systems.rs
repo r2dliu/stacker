@@ -1,5 +1,6 @@
 use super::components::*;
 use super::resources::*;
+use bevy::core_pipeline::clear_color::ClearColorConfig;
 use bevy::prelude::*;
 
 pub fn setup_gui(
@@ -15,7 +16,11 @@ pub fn setup_gui(
                 order: 1,
                 ..default()
             },
-            ..Default::default()
+            camera_2d: Camera2d {
+                clear_color: ClearColorConfig::None,
+                ..default()
+            },
+            ..default()
         },
         Gui,
     ));

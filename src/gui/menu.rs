@@ -44,10 +44,10 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                             height: Val::Px(50.0),
                             justify_content: JustifyContent::Center,
                             align_items: AlignItems::Center,
-                            ..Default::default()
+                            ..default()
                         },
                         background_color: button_colors.normal.into(),
-                        ..Default::default()
+                        ..default()
                     },
                     button_colors,
                 ))
@@ -88,10 +88,10 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                             justify_content: JustifyContent::SpaceAround,
                             align_items: AlignItems::Center,
                             padding: UiRect::all(Val::Px(5.)),
-                            ..Default::default()
+                            ..default()
                         },
                         background_color: Color::NONE.into(),
-                        ..Default::default()
+                        ..default()
                     },
                     ButtonColors {
                         normal: Color::NONE,
@@ -129,7 +129,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                             ..default()
                         },
                         background_color: Color::NONE.into(),
-                        ..Default::default()
+                        ..default()
                     },
                     ButtonColors {
                         normal: Color::NONE,

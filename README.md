@@ -2,6 +2,12 @@
 
 Install [Rust](https://www.rust-lang.org/tools/install)
 If using VSCode, install rust-analyzer, Even Better Toml, and CodeLLDB (Linux, MacOS)
+
+copy paste the os specific settings.<os>.json file in .vscode and rename to settings.json
+On MacOS:
+create a symlink via
+`ln -s /Users/<youruser>/.cargo/bin/cargo /usr/local/bin/cargo`
+in order to make CodeLLDB function properly. If you've installed cargo in a non default location modify the symlink accordingly.
 TODO: figure out debugging on windows
 
 # A Bevy game template

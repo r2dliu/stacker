@@ -14,13 +14,13 @@ pub fn setup_board(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-    println!("genearting board");
+    println!("generating board");
     let camera_entity = commands
         .spawn((
             Camera3dBundle {
-                transform: Transform::from_xyz(-250.0, 450.0, 900.0)
+                transform: Transform::from_xyz(1000.0, -1000.0, 100.0)
                     .looking_at(Vec3::ZERO, Vec3::Y),
-                ..Default::default()
+                ..default()
             },
             Board,
         ))
@@ -35,9 +35,9 @@ pub fn setup_board(
             commands.spawn((
                 Square { x: i, y: j },
                 PbrBundle {
-                    mesh: meshes.add(Mesh::from(shape::Cube { size: 100.0 })),
+                    mesh: meshes.add(shape::Box::new(100., 100., 10.).into()),
                     material: materials.add(Color::rgb_u8(124, 144, 255).into()),
-                    transform: Transform::from_xyz(0.0, 50.0, 0.0),
+                    transform: Transform::from_xyz(100.0 * (i as f32), 100.0 * (j as f32), 0.0),
                     ..default()
                 },
             ));
