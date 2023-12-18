@@ -3,6 +3,7 @@ use bevy::prelude::*;
 use crate::AppState;
 
 pub mod components;
+pub mod debug_overlay;
 pub mod in_game_menu;
 pub mod menu;
 pub mod resources;

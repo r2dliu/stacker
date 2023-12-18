@@ -20,6 +20,7 @@ use crate::player::PlayerPlugin;
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::prelude::*;
 use bevy::{app::App, core_pipeline::experimental::taa::TemporalAntiAliasPlugin};
+use gui::debug_overlay::DebugOverlayPlugin;
 
 // This example game uses States to separate logic
 // See https://bevy-cheatbook.github.io/programming/states.html
@@ -48,8 +49,8 @@ impl Plugin for StackerPlugin {
         app.add_state::<AppState>()
             .add_state::<GameState>()
             .add_plugins((
-                TemporalAntiAliasPlugin,
                 LoadingPlugin,
+                DebugOverlayPlugin,
                 MenuPlugin,
                 BoardPlugin,
                 GuiPlugin,

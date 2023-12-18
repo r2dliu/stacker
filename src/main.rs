@@ -1,6 +1,7 @@
 // disable console on windows for release builds
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use bevy::core_pipeline::experimental::taa::TemporalAntiAliasPlugin;
 use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use bevy::winit::WinitWindows;
@@ -30,6 +31,7 @@ fn main() {
         }))
         .add_plugins(StackerPlugin)
         .add_plugins(PanOrbitCameraPlugin)
+        .add_plugins(TemporalAntiAliasPlugin)
         .add_systems(Startup, set_window_icon)
         .run();
 }

@@ -19,17 +19,27 @@ pub fn setup_board(
     let camera_entity = commands
         .spawn((
             Camera3dBundle {
-                transform: Transform::from_translation(Vec3::new(1000.0, 1500., 900.0))
-                    .looking_at(Vec3::ZERO, Vec3::Y),
+                transform: Transform::from_translation(Vec3::new(
+                    100. * (BOARD_LENGTH as f32) / 2.,
+                    100. * (BOARD_LENGTH as f32) / 2.,
+                    1000.,
+                )),
                 ..default()
             },
-            PanOrbitCamera::default(),
+            PanOrbitCamera {
+                focus: Vec3::new(
+                    100. * (BOARD_LENGTH as f32) / 2.,
+                    100. * (BOARD_LENGTH as f32) / 2.,
+                    0.,
+                ),
+                ..default()
+            },
             Board,
         ))
         .id();
 
     let mut camera = commands.entity(camera_entity);
-
+    println!("generated camera");
     camera.insert(Fxaa::default());
 
     for i in 0..BOARD_LENGTH {
