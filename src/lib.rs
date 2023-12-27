@@ -3,9 +3,11 @@
 mod actions;
 mod audio;
 mod board;
+mod engine;
 mod gui;
 mod loading;
 mod player;
+mod test;
 
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
